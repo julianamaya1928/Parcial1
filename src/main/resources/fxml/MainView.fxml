@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.lenguajecafetero.controller.MainController"
+            styleClass="root-pane">
+
+    <top>
+        <VBox spacing="6" styleClass="header-box">
+            <padding>
+                <Insets top="16" right="20" bottom="12" left="20"/>
+            </padding>
+            <Label text="LenguajeCafetero" styleClass="app-title"/>
+            <Label text="Sistema de gestión académica — Parcial I Programación II"
+                   styleClass="app-subtitle"/>
+            <Separator/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="12" alignment="CENTER">
+            <padding>
+                <Insets top="24" right="24" bottom="24" left="24"/>
+            </padding>
+            <Label text="Arquitectura MVC inicializada"
+                   styleClass="section-title"/>
+            <Label text="model / view / controller"
+                   styleClass="hint-label"/>
+            <Label fx:id="lblEstado" styleClass="status-label"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox styleClass="footer-box">
+            <padding>
+                <Insets top="8" right="20" bottom="12" left="20"/>
+            </padding>
+            <Label text="Sin lógica de negocio aún — solo esqueleto del proyecto"
+                   styleClass="footer-label"/>
+        </VBox>
+    </bottom>
+</BorderPane>
