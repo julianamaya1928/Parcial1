@@ -2,6 +2,7 @@ package com.lenguajecafetero;
 
 import com.lenguajecafetero.controller.MainController;
 import com.lenguajecafetero.model.Academia;
+import com.lenguajecafetero.model.DemoData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +14,7 @@ import java.util.Objects;
 
 /**
  * Punto de entrada JavaFX.
- * Crea la Academia (modelo) e inyecta el controlador principal (MVC).
+ * Crea la Academia, carga datos demo e inyecta el controlador (MVC).
  */
 public class MainApp extends Application {
 
@@ -22,6 +23,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Academia academia = crearAcademia();
+        DemoData.cargar(academia);
 
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(
                 getClass().getResource("/fxml/MainView.fxml"),
@@ -31,7 +33,7 @@ public class MainApp extends Application {
         MainController controller = loader.getController();
         controller.setAcademia(academia);
 
-        Scene scene = new Scene(root, 980, 640);
+        Scene scene = new Scene(root, 1100, 720);
         var css = getClass().getResource("/css/app.css");
         if (css != null) {
             scene.getStylesheets().add(css.toExternalForm());
@@ -39,8 +41,8 @@ public class MainApp extends Application {
 
         stage.setTitle(APP_TITLE);
         stage.setScene(scene);
-        stage.setMinWidth(800);
-        stage.setMinHeight(520);
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
         stage.show();
     }
 

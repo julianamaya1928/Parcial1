@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -15,9 +11,7 @@
 
     <top>
         <VBox spacing="4" styleClass="header-box">
-            <padding>
-                <Insets top="14" right="20" bottom="10" left="20"/>
-            </padding>
+            <padding><Insets top="12" right="16" bottom="8" left="16"/></padding>
             <Label text="LenguajeCafetero" styleClass="app-title"/>
             <Label fx:id="lblAcademia" text="Academia de idiomas" styleClass="app-subtitle"/>
             <Separator/>
@@ -29,52 +23,206 @@
             <tabs>
                 <Tab text="Estudiantes" closable="false">
                     <content>
-                        <VBox spacing="12" styleClass="section-pane">
-                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
-                            <Label text="Estudiantes" styleClass="section-title"/>
-                            <Label text="Alta y listado de estudiantes (fase CRUD)." styleClass="hint-label"/>
-                            <Label fx:id="lblResumenEstudiantes" styleClass="summary-label"/>
-                        </VBox>
-                    </content>
-                </Tab>
-                <Tab text="Cursos" closable="false">
-                    <content>
-                        <VBox spacing="12" styleClass="section-pane">
-                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
-                            <Label text="Cursos" styleClass="section-title"/>
-                            <Label text="Alta por tipo (Factory) y listado (fase CRUD)." styleClass="hint-label"/>
-                            <Label fx:id="lblResumenCursos" styleClass="summary-label"/>
-                        </VBox>
+                        <SplitPane dividerPositions="0.45" orientation="HORIZONTAL">
+                            <VBox spacing="8" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="Registrar estudiante" styleClass="section-title"/>
+                                <GridPane hgap="8" vgap="8">
+                                    <Label text="Documento:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtEstDocumento" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="200"/>
+                                    <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtEstNombre" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                    <Label text="Telefono:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtEstTelefono" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                    <Label text="Correo:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtEstCorreo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                    <Label text="Edad:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtEstEdad" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                </GridPane>
+                                <Button text="Registrar" onAction="#onRegistrarEstudiante" styleClass="primary-btn"/>
+                            </VBox>
+                            <VBox spacing="8" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="Listado" styleClass="section-title"/>
+                                <TableView fx:id="tblEstudiantes" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colEstDoc" text="Documento" prefWidth="100"/>
+                                        <TableColumn fx:id="colEstNombre" text="Nombre" prefWidth="160"/>
+                                        <TableColumn fx:id="colEstTel" text="Telefono" prefWidth="110"/>
+                                        <TableColumn fx:id="colEstCorreo" text="Correo" prefWidth="150"/>
+                                        <TableColumn fx:id="colEstEdad" text="Edad" prefWidth="60"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                        </SplitPane>
                     </content>
                 </Tab>
                 <Tab text="Profesores" closable="false">
                     <content>
-                        <VBox spacing="12" styleClass="section-pane">
-                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
-                            <Label text="Profesores" styleClass="section-title"/>
-                            <Label text="Alta y listado; asignacion en matriculas personalizadas." styleClass="hint-label"/>
-                            <Label fx:id="lblResumenProfesores" styleClass="summary-label"/>
-                        </VBox>
+                        <SplitPane dividerPositions="0.4" orientation="HORIZONTAL">
+                            <VBox spacing="8" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="Registrar profesor" styleClass="section-title"/>
+                                <GridPane hgap="8" vgap="8">
+                                    <Label text="Identificacion:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtProfId" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="180"/>
+                                    <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtProfNombre" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                    <Label text="Idioma:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <ComboBox fx:id="cmbProfIdioma" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="180"/>
+                                    <Label text="Telefono:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtProfTelefono" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                    <Label text="Tarifa/sesion:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtProfTarifa" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                </GridPane>
+                                <Button text="Registrar" onAction="#onRegistrarProfesor" styleClass="primary-btn"/>
+                            </VBox>
+                            <VBox spacing="8" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="Listado" styleClass="section-title"/>
+                                <TableView fx:id="tblProfesores" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colProfId" text="ID" prefWidth="90"/>
+                                        <TableColumn fx:id="colProfNombre" text="Nombre" prefWidth="160"/>
+                                        <TableColumn fx:id="colProfIdioma" text="Idioma" prefWidth="100"/>
+                                        <TableColumn fx:id="colProfTarifa" text="Tarifa" prefWidth="100"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                        </SplitPane>
                     </content>
                 </Tab>
                 <Tab text="Servicios" closable="false">
                     <content>
-                        <VBox spacing="12" styleClass="section-pane">
-                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
-                            <Label text="Servicios adicionales" styleClass="section-title"/>
-                            <Label text="Alta y listado; se asocian a la matricula." styleClass="hint-label"/>
-                            <Label fx:id="lblResumenServicios" styleClass="summary-label"/>
-                        </VBox>
+                        <SplitPane dividerPositions="0.4" orientation="HORIZONTAL">
+                            <VBox spacing="8" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="Registrar servicio" styleClass="section-title"/>
+                                <GridPane hgap="8" vgap="8">
+                                    <Label text="Codigo:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtSrvCodigo" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="180"/>
+                                    <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtSrvNombre" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                    <Label text="Descripcion:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtSrvDescripcion" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                    <Label text="Precio:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtSrvPrecio" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                    <CheckBox fx:id="chkSrvDisponible" text="Disponible" selected="true"
+                                              GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                </GridPane>
+                                <Button text="Registrar" onAction="#onRegistrarServicio" styleClass="primary-btn"/>
+                            </VBox>
+                            <VBox spacing="8" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="Listado" styleClass="section-title"/>
+                                <TableView fx:id="tblServicios" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colSrvCodigo" text="Codigo" prefWidth="90"/>
+                                        <TableColumn fx:id="colSrvNombre" text="Nombre" prefWidth="180"/>
+                                        <TableColumn fx:id="colSrvPrecio" text="Precio" prefWidth="100"/>
+                                        <TableColumn fx:id="colSrvDisp" text="Disp." prefWidth="70"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                        </SplitPane>
+                    </content>
+                </Tab>
+                <Tab text="Cursos" closable="false">
+                    <content>
+                        <SplitPane dividerPositions="0.42" orientation="HORIZONTAL">
+                            <VBox spacing="6" styleClass="section-pane">
+                                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                                <Label text="Registrar curso (Factory)" styleClass="section-title"/>
+                                <GridPane hgap="6" vgap="6">
+                                    <Label text="Tipo:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <ComboBox fx:id="cmbCurTipo" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="160"/>
+                                    <Label text="Codigo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtCurCodigo" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                    <Label text="Nombre:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtCurNombre" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                    <Label text="Idioma:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <ComboBox fx:id="cmbCurIdioma" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                    <Label text="Descripcion:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtCurDescripcion" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                    <Label text="Duracion (m):" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtCurDuracion" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                                    <Label text="Valor mensual:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtCurValor" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                                    <Label text="Estado:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                                    <ComboBox fx:id="cmbCurEstado" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                                    <Label text="Factor int.:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtCurFactor" promptText="1.25" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+                                    <Label text="Sesiones:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtCurSesiones" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+                                    <Label text="Nivel:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                                    <ComboBox fx:id="cmbCurNivel" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+                                    <Label text="Objetivos:" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtCurObjetivos" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+                                </GridPane>
+                                <Button text="Registrar curso" onAction="#onRegistrarCurso" styleClass="primary-btn"/>
+                            </VBox>
+                            <VBox spacing="8" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="Listado" styleClass="section-title"/>
+                                <TableView fx:id="tblCursos" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colCurCodigo" text="Codigo" prefWidth="100"/>
+                                        <TableColumn fx:id="colCurNombre" text="Nombre" prefWidth="160"/>
+                                        <TableColumn fx:id="colCurTipo" text="Tipo" prefWidth="100"/>
+                                        <TableColumn fx:id="colCurIdioma" text="Idioma" prefWidth="90"/>
+                                        <TableColumn fx:id="colCurValor" text="Valor/mes" prefWidth="90"/>
+                                        <TableColumn fx:id="colCurEstado" text="Estado" prefWidth="90"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                        </SplitPane>
                     </content>
                 </Tab>
                 <Tab text="Matriculas" closable="false">
                     <content>
-                        <VBox spacing="12" styleClass="section-pane">
-                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
-                            <Label text="Matriculas" styleClass="section-title"/>
-                            <Label text="Alta con Builder; valor calculado en el modelo." styleClass="hint-label"/>
-                            <Label fx:id="lblResumenMatriculas" styleClass="summary-label"/>
-                        </VBox>
+                        <SplitPane dividerPositions="0.42" orientation="HORIZONTAL">
+                            <VBox spacing="6" styleClass="section-pane">
+                                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                                <Label text="Registrar matricula (Builder)" styleClass="section-title"/>
+                                <GridPane hgap="6" vgap="6">
+                                    <Label text="Codigo:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtMatCodigo" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="180"/>
+                                    <Label text="Fecha:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <DatePicker fx:id="dtpMatFecha" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                    <Label text="Estudiante:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <ComboBox fx:id="cmbMatEstudiante" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="200"/>
+                                    <Label text="Curso:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <ComboBox fx:id="cmbMatCurso" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="200"/>
+                                    <Label text="Profesor:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <ComboBox fx:id="cmbMatProfesor" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="200"
+                                              promptText="Solo personalizado"/>
+                                    <Label text="Meses:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtMatMeses" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                                    <Label text="Descuento:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="txtMatDescuento" promptText="0" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                                </GridPane>
+                                <Label text="Servicios (Ctrl/Cmd + clic para varios):" styleClass="hint-label"/>
+                                <ListView fx:id="lstMatServicios" prefHeight="90"/>
+                                <HBox spacing="8">
+                                    <Button text="Previsualizar valor" onAction="#onPreviewValorMatricula"/>
+                                    <Button text="Registrar" onAction="#onRegistrarMatricula" styleClass="primary-btn"/>
+                                </HBox>
+                                <Label fx:id="lblMatValorPreview" text="Valor estimado: -" styleClass="summary-label"/>
+                            </VBox>
+                            <VBox spacing="8" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="Listado (valor calculado por el modelo)" styleClass="section-title"/>
+                                <TableView fx:id="tblMatriculas" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colMatCodigo" text="Codigo" prefWidth="90"/>
+                                        <TableColumn fx:id="colMatFecha" text="Fecha" prefWidth="100"/>
+                                        <TableColumn fx:id="colMatEstudiante" text="Estudiante" prefWidth="140"/>
+                                        <TableColumn fx:id="colMatCurso" text="Curso" prefWidth="160"/>
+                                        <TableColumn fx:id="colMatValor" text="Valor final" prefWidth="110"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                        </SplitPane>
                     </content>
                 </Tab>
                 <Tab text="Consultas" closable="false">
@@ -82,8 +230,10 @@
                         <VBox spacing="12" styleClass="section-pane">
                             <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
                             <Label text="Consultas" styleClass="section-title"/>
-                            <Label text="RF-07 busqueda por documento · RF-08 ingresos por periodo." styleClass="hint-label"/>
-                            <Label fx:id="lblResumenConsultas" styleClass="summary-label"/>
+                            <Label text="RF-07 busqueda por documento y RF-08 ingresos por periodo se implementan en la fase 11."
+                                   styleClass="hint-label"/>
+                            <Label text="Use las pestanas anteriores para CRUD. Los datos demo ya estan cargados."
+                                   styleClass="summary-label"/>
                         </VBox>
                     </content>
                 </Tab>
@@ -94,7 +244,7 @@
     <bottom>
         <VBox styleClass="footer-box">
             <padding><Insets top="8" right="20" bottom="10" left="20"/></padding>
-            <Label fx:id="lblEstado" text="Shell MVC - navegacion lista" styleClass="footer-label"/>
+            <Label fx:id="lblEstado" text="CRUD listo" styleClass="footer-label"/>
         </VBox>
     </bottom>
 </BorderPane>
