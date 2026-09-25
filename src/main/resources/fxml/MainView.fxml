@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -12,37 +14,87 @@
             styleClass="root-pane">
 
     <top>
-        <VBox spacing="6" styleClass="header-box">
+        <VBox spacing="4" styleClass="header-box">
             <padding>
-                <Insets top="16" right="20" bottom="12" left="20"/>
+                <Insets top="14" right="20" bottom="10" left="20"/>
             </padding>
             <Label text="LenguajeCafetero" styleClass="app-title"/>
-            <Label text="Sistema de gestión académica — Parcial I Programación II"
-                   styleClass="app-subtitle"/>
+            <Label fx:id="lblAcademia" text="Academia de idiomas" styleClass="app-subtitle"/>
             <Separator/>
         </VBox>
     </top>
 
     <center>
-        <VBox spacing="12" alignment="CENTER">
-            <padding>
-                <Insets top="24" right="24" bottom="24" left="24"/>
-            </padding>
-            <Label text="Arquitectura MVC inicializada"
-                   styleClass="section-title"/>
-            <Label text="model / view / controller"
-                   styleClass="hint-label"/>
-            <Label fx:id="lblEstado" styleClass="status-label"/>
-        </VBox>
+        <TabPane fx:id="tabSecciones" tabClosingPolicy="UNAVAILABLE" styleClass="main-tabs">
+            <tabs>
+                <Tab text="Estudiantes" closable="false">
+                    <content>
+                        <VBox spacing="12" styleClass="section-pane">
+                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+                            <Label text="Estudiantes" styleClass="section-title"/>
+                            <Label text="Alta y listado de estudiantes (fase CRUD)." styleClass="hint-label"/>
+                            <Label fx:id="lblResumenEstudiantes" styleClass="summary-label"/>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Cursos" closable="false">
+                    <content>
+                        <VBox spacing="12" styleClass="section-pane">
+                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+                            <Label text="Cursos" styleClass="section-title"/>
+                            <Label text="Alta por tipo (Factory) y listado (fase CRUD)." styleClass="hint-label"/>
+                            <Label fx:id="lblResumenCursos" styleClass="summary-label"/>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Profesores" closable="false">
+                    <content>
+                        <VBox spacing="12" styleClass="section-pane">
+                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+                            <Label text="Profesores" styleClass="section-title"/>
+                            <Label text="Alta y listado; asignacion en matriculas personalizadas." styleClass="hint-label"/>
+                            <Label fx:id="lblResumenProfesores" styleClass="summary-label"/>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Servicios" closable="false">
+                    <content>
+                        <VBox spacing="12" styleClass="section-pane">
+                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+                            <Label text="Servicios adicionales" styleClass="section-title"/>
+                            <Label text="Alta y listado; se asocian a la matricula." styleClass="hint-label"/>
+                            <Label fx:id="lblResumenServicios" styleClass="summary-label"/>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Matriculas" closable="false">
+                    <content>
+                        <VBox spacing="12" styleClass="section-pane">
+                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+                            <Label text="Matriculas" styleClass="section-title"/>
+                            <Label text="Alta con Builder; valor calculado en el modelo." styleClass="hint-label"/>
+                            <Label fx:id="lblResumenMatriculas" styleClass="summary-label"/>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Consultas" closable="false">
+                    <content>
+                        <VBox spacing="12" styleClass="section-pane">
+                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+                            <Label text="Consultas" styleClass="section-title"/>
+                            <Label text="RF-07 busqueda por documento · RF-08 ingresos por periodo." styleClass="hint-label"/>
+                            <Label fx:id="lblResumenConsultas" styleClass="summary-label"/>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
     </center>
 
     <bottom>
         <VBox styleClass="footer-box">
-            <padding>
-                <Insets top="8" right="20" bottom="12" left="20"/>
-            </padding>
-            <Label text="Sin lógica de negocio aún — solo esqueleto del proyecto"
-                   styleClass="footer-label"/>
+            <padding><Insets top="8" right="20" bottom="10" left="20"/></padding>
+            <Label fx:id="lblEstado" text="Shell MVC - navegacion lista" styleClass="footer-label"/>
         </VBox>
     </bottom>
 </BorderPane>

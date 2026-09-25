@@ -15,7 +15,29 @@
 
 .app-subtitle {
     -fx-text-fill: #d6e3f0;
-    -fx-font-size: 13px;
+    -fx-font-size: 12px;
+}
+
+.main-tabs {
+    -fx-background-color: #f5f7fa;
+    -fx-padding: 4 8 0 8;
+}
+
+.main-tabs .tab-header-background {
+    -fx-background-color: #e8eef5;
+}
+
+.main-tabs .tab:selected .tab-label {
+    -fx-text-fill: #1f4e79;
+    -fx-font-weight: bold;
+}
+
+.section-pane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 6;
+    -fx-border-color: #d0d7e2;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
 }
 
 .section-title {
@@ -29,17 +51,21 @@
     -fx-text-fill: #5a6a7a;
 }
 
-.status-label {
+.summary-label {
     -fx-font-size: 14px;
     -fx-text-fill: #2e75b6;
-    -fx-padding: 8 0 0 0;
+    -fx-padding: 12 14 12 14;
+    -fx-background-color: #eef4fb;
+    -fx-background-radius: 4;
 }
 
 .footer-box {
     -fx-background-color: #e8eef5;
+    -fx-border-color: #d0d7e2;
+    -fx-border-width: 1 0 0 0;
 }
 
 .footer-label {
-    -fx-font-size: 11px;
-    -fx-text-fill: #666666;
+    -fx-font-size: 12px;
+    -fx-text-fill: #4a5560;
 }

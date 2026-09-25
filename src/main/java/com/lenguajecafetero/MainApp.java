@@ -1,5 +1,7 @@
 package com.lenguajecafetero;
 
+import com.lenguajecafetero.controller.MainController;
+import com.lenguajecafetero.model.Academia;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,30 +12,26 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * Punto de entrada de la aplicación JavaFX.
- * Academia de idiomas LenguajeCafetero — Parcial I Programación II.
- *
- * <p>Arquitectura MVC:
- * <ul>
- *   <li>{@code model} — dominio y reglas de negocio</li>
- *   <li>{@code view} — FXML / recursos visuales</li>
- *   <li>{@code controller} — controladores JavaFX</li>
- * </ul>
+ * Punto de entrada JavaFX.
+ * Crea la Academia (modelo) e inyecta el controlador principal (MVC).
  */
 public class MainApp extends Application {
 
-    public static final String APP_TITLE = "LenguajeCafetero — Gestión académica";
+    public static final String APP_TITLE = "LenguajeCafetero - Gestion academica";
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(
-                Objects.requireNonNull(
-                        getClass().getResource("/fxml/MainView.fxml"),
-                        "No se encontró /fxml/MainView.fxml"
-                )
-        );
+        Academia academia = crearAcademia();
 
-        Scene scene = new Scene(root, 900, 600);
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(
+                getClass().getResource("/fxml/MainView.fxml"),
+                "No se encontro /fxml/MainView.fxml"));
+        Parent root = loader.load();
+
+        MainController controller = loader.getController();
+        controller.setAcademia(academia);
+
+        Scene scene = new Scene(root, 980, 640);
         var css = getClass().getResource("/css/app.css");
         if (css != null) {
             scene.getStylesheets().add(css.toExternalForm());
@@ -41,9 +39,19 @@ public class MainApp extends Application {
 
         stage.setTitle(APP_TITLE);
         stage.setScene(scene);
-        stage.setMinWidth(720);
-        stage.setMinHeight(480);
+        stage.setMinWidth(800);
+        stage.setMinHeight(520);
         stage.show();
+    }
+
+    private static Academia crearAcademia() {
+        return new Academia(
+                "LenguajeCafetero",
+                "900.123.456-7",
+                "Calle 10 # 5-20, Manizales",
+                "+57 6 880 0000",
+                "contacto@lenguajecafetero.edu.co",
+                "https://www.lenguajecafetero.edu.co");
     }
 
     public static void main(String[] args) {
