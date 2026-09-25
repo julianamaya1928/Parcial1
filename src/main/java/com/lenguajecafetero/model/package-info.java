@@ -1,7 +1,7 @@
 /**
  * Modelo de dominio de la academia LenguajeCafetero.
  *
- * <p>Fases 2-5: enums, entidades, jerarquia de cursos y Matricula.</p>
- * <p>Pendiente: factory/builder, Academia, UI.</p>
+ * <p>Fases 2-6: enums, entidades, cursos, Matricula, CursoFactory y MatriculaBuilder.</p>
+ * <p>Pendiente: Academia, pruebas, UI.</p>
  */
 package com.lenguajecafetero.model;
