@@ -227,14 +227,39 @@
                 </Tab>
                 <Tab text="Consultas" closable="false">
                     <content>
-                        <VBox spacing="12" styleClass="section-pane">
-                            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
-                            <Label text="Consultas" styleClass="section-title"/>
-                            <Label text="RF-07 busqueda por documento y RF-08 ingresos por periodo se implementan en la fase 11."
-                                   styleClass="hint-label"/>
-                            <Label text="Use las pestanas anteriores para CRUD. Los datos demo ya estan cargados."
-                                   styleClass="summary-label"/>
-                        </VBox>
+                        <HBox spacing="16" styleClass="section-pane">
+                            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="RF-07 · Buscar estudiante por documento" styleClass="section-title"/>
+                                <Label text="Delega en Academia.buscarEstudiantePorDocumento (modelo)."
+                                       styleClass="hint-label"/>
+                                <HBox spacing="8">
+                                    <TextField fx:id="txtConsultaDocumento" promptText="Documento"
+                                               prefWidth="180"/>
+                                    <Button text="Buscar" onAction="#onBuscarEstudiante"
+                                            styleClass="primary-btn"/>
+                                </HBox>
+                                <Label fx:id="lblConsultaEstudiante" text="Resultado: -"
+                                       styleClass="summary-label" wrapText="true"/>
+                            </VBox>
+                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="section-pane">
+                                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                                <Label text="RF-08 · Ingresos por periodo" styleClass="section-title"/>
+                                <Label text="Delega en Academia.calcularIngresosPorPeriodo (modelo)."
+                                       styleClass="hint-label"/>
+                                <GridPane hgap="8" vgap="8">
+                                    <Label text="Fecha inicio:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <DatePicker fx:id="dtpIngresosInicio" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                    <Label text="Fecha fin:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <DatePicker fx:id="dtpIngresosFin" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                </GridPane>
+                                <Button text="Calcular ingresos" onAction="#onCalcularIngresos"
+                                        styleClass="primary-btn"/>
+                                <Label fx:id="lblIngresosResultado" text="Total ingresos: -"
+                                       styleClass="summary-label" wrapText="true"/>
+                            </VBox>
+                        </HBox>
                     </content>
                 </Tab>
             </tabs>
@@ -248,3 +273,4 @@
         </VBox>
     </bottom>
 </BorderPane>
+

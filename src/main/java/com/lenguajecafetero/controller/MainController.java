@@ -97,6 +97,12 @@ public class MainController {
     @FXML private ListView<ServicioAdicional> lstMatServicios;
     @FXML private Label lblMatValorPreview;
 
+    @FXML private TextField txtConsultaDocumento;
+    @FXML private Label lblConsultaEstudiante;
+    @FXML private DatePicker dtpIngresosInicio;
+    @FXML private DatePicker dtpIngresosFin;
+    @FXML private Label lblIngresosResultado;
+
 @FXML
     private void initialize() {
         configurarTablas();
@@ -123,6 +129,12 @@ public class MainController {
         }
         if (dtpMatFecha != null) {
             dtpMatFecha.setValue(LocalDate.now());
+        }
+        if (dtpIngresosInicio != null) {
+            dtpIngresosInicio.setValue(LocalDate.of(2026, 2, 1));
+        }
+        if (dtpIngresosFin != null) {
+            dtpIngresosFin.setValue(LocalDate.of(2026, 2, 28));
         }
         if (tabSecciones != null) {
             tabSecciones.getSelectionModel().selectedItemProperty().addListener(
@@ -499,7 +511,70 @@ private void limpiarEstudiante() {
         }
     }
 
+    @FXML
+    private void onBuscarEstudiante() {
+        try {
+            if (academia == null) {
+                mostrarError("Academia no inicializada");
+                return;
+            }
+            String doc = txtConsultaDocumento != null ? txtConsultaDocumento.getText() : null;
+            var encontrado = academia.buscarEstudiantePorDocumento(doc);
+            if (encontrado.isPresent()) {
+                Estudiante e = encontrado.get();
+                String texto = "Encontrado: " + e.getNombreCompleto()
+                        + "\nDocumento: " + e.getDocumento()
+                        + "\nTelefono: " + nullSafe(e.getTelefono())
+                        + "\nCorreo: " + nullSafe(e.getCorreo())
+                        + "\nEdad: " + e.getEdad()
+                        + "\nRegistro: " + e.getFechaRegistro();
+                if (lblConsultaEstudiante != null) {
+                    lblConsultaEstudiante.setText(texto);
+                }
+                mostrarInfo("RF-07: estudiante " + e.getDocumento() + " encontrado");
+            } else {
+                if (lblConsultaEstudiante != null) {
+                    lblConsultaEstudiante.setText("No se encontro estudiante con documento: "
+                            + (doc != null ? doc.trim() : "(vacio)"));
+                }
+                mostrarInfo("RF-07: sin resultados");
+            }
+        } catch (Exception ex) {
+            mostrarError(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void onCalcularIngresos() {
+        try {
+            if (academia == null) {
+                mostrarError("Academia no inicializada");
+                return;
+            }
+            LocalDate ini = dtpIngresosInicio != null ? dtpIngresosInicio.getValue() : null;
+            LocalDate fin = dtpIngresosFin != null ? dtpIngresosFin.getValue() : null;
+            double total = academia.calcularIngresosPorPeriodo(ini, fin);
+            long conteo = academia.getMatriculas().stream()
+                    .filter(m -> {
+                        LocalDate f = m.getFecha();
+                        return (f.isEqual(ini) || f.isAfter(ini))
+                                && (f.isEqual(fin) || f.isBefore(fin));
+                    })
+                    .count();
+            if (lblIngresosResultado != null) {
+                lblIngresosResultado.setText(
+                        "Periodo: " + ini + " a " + fin
+                                + "\nMatriculas en rango: " + conteo
+                                + "\nTotal ingresos: $" + String.format("%,.2f", total));
+            }
+            mostrarInfo("RF-08: ingresos $" + String.format("%,.2f", total));
+        } catch (Exception ex) {
+            mostrarError(ex.getMessage());
+        }
+    }
+
     private static String nullSafe(String s) {
         return s != null ? s : "";
     }
 }
+
