@@ -15,6 +15,7 @@ import java.util.Objects;
  * valorFinal     = max(0, valorCurso + valorSesiones + valorServicios - descuento)
  * </pre>
  * Identificador de negocio: {@link #codigo}.
+ * <p>SOLID S: el valor se calcula aqui, no en la UI.</p>
  */
 public class Matricula {
 

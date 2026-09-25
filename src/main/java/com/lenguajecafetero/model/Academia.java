@@ -9,6 +9,11 @@ import java.util.Optional;
 /**
  * Raiz / fachada del dominio: datos institucionales y orquestacion
  * de registros y consultas (busqueda e ingresos por periodo).
+ * <p>
+ * SOLID: Single Responsibility (orquestacion, no UI ni tarifas);
+ * Dependency Inversion (los controladores dependen de esta fachada).
+ * RF-07: {@link #buscarEstudiantePorDocumento}; RF-08: {@link #calcularIngresosPorPeriodo}.
+ * </p>
  */
 public class Academia {
 

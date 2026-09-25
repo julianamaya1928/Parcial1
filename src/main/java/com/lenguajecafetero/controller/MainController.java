@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Controlador principal MVC: navegacion + CRUD.
- * Toda la logica de negocio vive en el modelo (Academia, Matricula, Factory, Builder).
+ * Controlador principal (capa Controller del MVC).
+ * <p>
+ * SOLID S: no calcula tarifas ni ingresos; delega en el modelo
+ * ({@link com.lenguajecafetero.model.Academia}, Factory, Builder).
+ * </p>
  */
 public class MainController {
 
