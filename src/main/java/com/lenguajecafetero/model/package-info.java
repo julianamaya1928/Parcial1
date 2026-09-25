@@ -1,17 +1,20 @@
 /**
- * Modelo de dominio de LenguajeCafetero.
+ * Modelo de dominio de la academia LenguajeCafetero.
  *
- * <p><b>Fase 2:</b> enumeraciones
- * ({@link com.lenguajecafetero.model.Idioma},
+ * <p>Fase 2: enumeraciones ({@link com.lenguajecafetero.model.Idioma},
  * {@link com.lenguajecafetero.model.EstadoCurso},
  * {@link com.lenguajecafetero.model.NivelIdioma},
- * {@link com.lenguajecafetero.model.TipoCurso}).
+ * {@link com.lenguajecafetero.model.TipoCurso}).</p>
  *
- * <p><b>Fase 3:</b> entidades simples
- * ({@link com.lenguajecafetero.model.Estudiante},
+ * <p>Fase 3: entidades simples ({@link com.lenguajecafetero.model.Estudiante},
  * {@link com.lenguajecafetero.model.Profesor},
- * {@link com.lenguajecafetero.model.ServicioAdicional}).
+ * {@link com.lenguajecafetero.model.ServicioAdicional}).</p>
  *
- * <p>Próximas: jerarquía de cursos, matrícula, factory/builder y Academia.
+ * <p>Fase 4: jerarquía de cursos ({@link com.lenguajecafetero.model.Curso},
+ * {@link com.lenguajecafetero.model.CursoRegular},
+ * {@link com.lenguajecafetero.model.CursoIntensivo},
+ * {@link com.lenguajecafetero.model.CursoPersonalizado}).</p>
+ *
+ * <p>Pendiente: matrícula, factory/builder, academia, UI.</p>
  */
 package com.lenguajecafetero.model;
